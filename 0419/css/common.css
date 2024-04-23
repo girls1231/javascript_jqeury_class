@@ -1,0 +1,106 @@
+@charset "utf-8";
+
+/* 헤더 푸터 공통 서식 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+
+:root{
+  --main_font:"Nanum Gothic";
+  --main_color:#333; /*검정색*/
+  --main_color2:#ff7c98; /*핑크색*/
+  --base_font_size13:13px;
+}
+
+body{
+  font-family: var(--main_font), sans-serif, arial;
+  font-size:  var(--main_font);
+  color: var(--main_color);
+}
+
+a{
+  color: var(--main_color);
+  text-decoration: none;
+}
+
+/* 헤더 */
+header{
+  width: 100%;
+  border-top: 3px solid var(--main_color2);
+  background-image: url(../images/bg_header.gif);
+}
+
+/* header top */
+.h_top{}
+
+.h_top h1{
+  text-align: center; 
+  height: 92px; 
+  margin: 0 auto; padding: 15px 0px;}
+
+/* header bottom : 보통 40~60정도의 높이 */
+.h_bottom{
+  width: 100%; height: 46px;
+  border-top: 1px solid #ccc; border-bottom: 1px solid #333; 
+  background-color: white;
+  position: absolute; z-index: 1000;
+  overflow: hidden;
+  transition: 0.5s; /*나오는 애니메이션을 부드럽게*/
+} 
+.h_bottom > nav{
+  width: 1200px; 
+  margin: 0 auto;
+  display: flex; justify-content: space-between;
+}
+.lnb, .gnb{
+  display: flex; justify-content: space-around;
+}
+
+.lnb{width: 200px;}
+.lnb > li{
+  padding: 0px 18px;
+  line-height: 46px;
+  font-weight: bold;
+}
+.lnb > li > a{
+  font-size: var(--base_font_size13);
+  font-weight: bold;
+}
+.lnb > li:first-child a{
+  color: var(--main_color2);
+}
+.lnb >li:last-child > a{color: #483834;}
+
+/* gnb  */
+.gnb{width: 1000px;}
+.gnb > li:first-child ul > li{padding-top:10px}
+.gnb > li{
+  line-height: 46px;
+  text-align: center;
+  position: relative;
+  padding: 0px 22px;
+  font-size: var(--base_font_size13);
+}
+.gnb > li> a{font-weight: bold; color: #3c0a0a;}
+
+/*오버했을때 라인 나오는 것*/
+.gnb::after{
+  /* display: block;  */
+  content:""; opacity: 0;
+  transition: 0.3s;
+  width: 100%; height: 1px; background-color: #fff;
+  position: absolute;top: 46px; left: 0px; }
+.gnb:hover::after{
+  /* display: block;  */
+  content:""; opacity: 1;
+  width: 100%; height: 1px; background-color: #333; 
+  position: absolute;top: 46px; left: 0px; }
+
+
+nav a{text-transform: uppercase;}
+
+/* 서브메뉴 */
+.sub{position: absolute; width: 100%; left: 0px;}
+.sub a{font-size: va(--base_font_size13);}
+.sub a:hover{color: #ff7c98;}
+
+.gnb > li:nth-child(2) .sub, .gnb > li:nth-child(4), .sub{width: 120px; left: 10px;}

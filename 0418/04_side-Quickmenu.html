@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사이드 퀵메뉴</title>
+    <!--아이콘폰트 주소  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" type="text/css" >
+  <!-- 제이쿼리 연결 -->
+  <!-- 1. 제이쿼리 직접 연결하기 -->
+  <script src="./script/jquery-3.7.1.min.js"></script> <!--최적화 버전 min  -->
+  <!-- 2. JQUERY.COM에서 CND방식으로 연결 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+
+  <style>
+    aside{position: fixed; right: 0px; top: 0px; width: 104px;}
+    aside i{position: absolute; top: 45%; right: 104px; font-size: 30px; padding: 10px 5px;background-color:rebeccapurple; color: white; border-radius: 10px 0 0 10px;}
+  </style>
+</head>
+<body>
+  <h2>사이드 퀵 메뉴 만들기</h2>
+  <p>웹페이지의 오른쪽 사이드에 위치하는 퀵메뉴를 숨기거나 나오게 하기</p>
+  <p>쇼핑몰 오른쪽 aside 영역에 '주문조회','배송조회','최근본상품','화면스크롤보턴,'top버튼' 요소들을 방향 버튼 클릭시 animate 메서드로 화면에 숨기거나 클릭시 다시 나오게 한다</p>
+  <p>1개의 버튼에 2가지 기능을 만듬(토글) : '>'버튼을 클릭하면 '<'모양으로 변경</p>
+
+  <aside>
+    <i class="fas fa-angle-right"></i>
+    <img src="./images/quick.jpg" alt="퀵메뉴">
+  </aside>
+
+  <script>
+    $(document).ready(function(){
+      const q_btn = $('aside i.fas');
+      let n = 0;
+
+      q_btn.click(function(){
+        if(n==0){
+          $('aside').animate({'right':'-104px'}); //aisde위치 변경
+          $('aside i.fas').css({'Transform':'rotate(180deg)','border-radius': ' 0 10px 10px 0'});//아이콘 방향 변경
+          n=1;
+        }else{
+          $('aside').animate({'right':'0px'}); //aisde위치 변경
+          $('aside i.fas').css({'Transform':'rotate(0deg)','border-radius': '10px 0 0 10px'});
+          n=0;
+        }
+        });    
+    });
+  </script>
+</body>
+</html>

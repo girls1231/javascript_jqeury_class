@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01 스타벅스 홈페이지</title>
+  <!--아이콘폰트 주소  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" type="text/css" >
+
+  <!-- 제이쿼리 연결 -->
+  <!-- 1. 제이쿼리 직접 연결하기 -->
+  <script src="./script/jquery-3.7.1.min.js"></script> <!--최적화 버전 min  -->
+  <!-- 2. JQUERY.COM에서 CND방식으로 연결 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<!-- 제이쿼리 랩퍼 -->
+  <script>
+    $(document).ready(function(){
+
+      // 보이면 안되니까 숨기고 시작
+      $('.main_banner img').hide();
+
+      //1. 메인슬라이드 이미지 커피, 타이틀 이미지 변수 
+      const c1_title = $('.main_banner img').eq(0);
+      const c1_img = $('.main_banner img').eq(1);
+      const c2_title = $('.main_banner img').eq(2);
+      const c2_img = $('.main_banner img').eq(3);
+      const c3_title = $('.main_banner img').eq(4);
+      const c3_img = $('.main_banner img').eq(5);
+
+      // 서서히 보이는데, 순차적으로 시간차를 두고 나오게(delay(500).를 중간에 걸어준다)
+      c1_title.fadeIn();
+      c1_img.fadeIn();
+
+      c2_title.delay(500).fadeIn();
+      c2_img.delay(500).fadeIn();
+
+      c3_title.delay(1000).fadeIn();
+      c3_img.delay(1000).fadeIn();
+
+    });
+</script>
+  <style>
+    *{margin: 0; padding: 0;}
+    .main_banner{width: 100%; height: 646px;background-image: url(./exec/images/bev_bg.jpg);}
+
+    .main_inner{width: 1200px; margin: 0 auto;height: 646px; border: 3px solid #f00;position: relative;} /*부모*/
+    .main_inner img{position:absolute;}/*자손*/
+    .main_inner img:nth-child(1){top: 27px; right: 282px;}/*자손*/
+    .main_inner img:nth-child(2){top: 50px; right: 104px;}/*자손*/
+    .main_inner img:nth-child(3){top: 152px; right: 365px;}/*자손*/
+    .main_inner img:nth-child(4){top: 200px; right: 105px;}/*자손*/
+    .main_inner img:nth-child(5){top: 157px; right: -45px;}/*자손*/
+    .main_inner img:nth-child(6){top: 250px; right: -128px;}/*자손*/
+
+/* qna */
+    .qna{width: 1100px; margin: 0 auto;}
+    .qna h2{font-size: 30px; line-height: 40px; margin-bottom: 30px;}
+    .qna p{line-height: 40px;}
+    .qna form p{background-color: #f4f4f2; text-align: right; line-height: 60px;}
+    .qna form input[type=search]{border-style: none; border: 1px solid #ccc; height: 30px; width: 300px;}
+    .qna form label{background-color: #4d4d4d;color: #fff;padding:  5px 10px; margin: 0px 10px; border-radius: 3px;}
+
+    .qna dl{margin-top: 30px; padding-top: 10px;border-top: 1px solid #333;border-bottom: 1px solid #333;}
+    .qna dt{line-height: 60px; color: #006633; border-bottom: 1px solid #ccc; }
+    .qna dt::before{content: "Q";}
+    .qna dd::before{content: "A"; font-weight: bold;}
+    .qna dd{background-color: #f4f4f2; padding: 26px 0px; color: #666; padding: 20px;display: none;}
+    .qna dd:first-of-type{display: block;}
+
+    .qna .fas{float: right; padding: 15px 20px 0 20px; font-size: 26px; color: #222;}
+    .act{transform: rotate(180deg) translateY(-10px) !important ;} /*그림 회전시키기*/
+
+/* 푸터 */
+    footer{height: 80px; background-color: #ccc;}
+  </style>
+</head>
+<body>
+<!-- 상단헤더 -->
+<header>
+  <h1>
+    <a href="#" title="메인페이지 바로가기">
+    <img src="./exec/images/logo.png" alt="상단로고">   
+  </a></h1>
+</header>
+<!-- 메인 -->
+<main>
+  <section class="main_banner">
+    <h2>메인사진</h2>
+    <div class="main_inner"> <!--img를 선택할 때 ea(), :nth-child() -->
+      <img src="./exec/images/bev1_txt.png" alt="밀크 초콜릿 제목">
+      <img src="./exec/images/bev1_cup.png" alt="밀크 초콜릿">
+      <img src="./exec/images/bev2_txt.png" alt="레몬티 제목">
+      <img src="./exec/images/bev2_cup.png" alt="레몬티">
+      <img src="./exec/images/bev3_txt.png" alt="토피넛라떼 제목">
+      <img src="./exec/images/bev3_cup.png" alt="토피넛라떼">
+    </div>
+  </section>
+
+  <section class="qna">
+    <h2>자주하는 질문</h2>
+    <p>e-Gift Card에 대한 궁금점이 많으신가요?고객님의 문의사항에 대한 답변을 빠르게 찾으실 수 있습니다.</p>
+    <form name="검색폼" action="search.php" method="post">
+      <p class="searchbox"><input type="search" id="search"><label for="search">검색</label></p>
+      <dl>
+        <dt>[온라인 스토어] 보낸 선물함이 사라졌는데, 과거에 선물한 이력은 어떻게 확인할 수 있나요? <i class="fas fa-angle-down act"></i></dt>
+        <dd>Gift배송하기 서비스에서 ‘배송지 입력’을 기준으로 주문내역이 노출되었던 것과는 달리, 온라인 스토어 서비스에서는 ‘결제’를 기준으로 주문내역이 노출됩니다. 따라서, 과거에 보내신 선물의 경우 스타벅스 앱 [Shop > 쇼핑하러 가기 > 마이페이지 > 주문내역]에서 확인하실 수 있습니다.아울러, 스타벅스 온라인 스토어의 [선물함]에는 다른 사람으로부터 선물 받은 내역만 노출됩니다.
+          - 주문내역: 결제한 주문 내역 (구매하기/선물하기) 
+          - 선물함: 선물 받은 내역 (선물받기)</dd>
+        <dt>[온라인 스토어] 보낸 선물함이 사라졌는데, 과거에 선물한 이력은 어떻게 확인할 수 있나요? <i class="fas fa-angle-down"></i></dt>
+        <dd>Gift배송하기 서비스에서 ‘배송지 입력’을 기준으로 주문내역이 노출되었던 것과는 달리, 온라인 스토어 서비스에서는 ‘결제’를 기준으로 주문내역이 노출됩니다. 따라서, 과거에 보내신 선물의 경우 스타벅스 앱 [Shop > 쇼핑하러 가기 > 마이페이지 > 주문내역]에서 확인하실 수 있습니다.아울러, 스타벅스 온라인 스토어의 [선물함]에는 다른 사람으로부터 선물 받은 내역만 노출됩니다.
+          - 주문내역: 결제한 주문 내역 (구매하기/선물하기) 
+          - 선물함: 선물 받은 내역 (선물받기)</dd>
+        <dt>[온라인 스토어] 보낸 선물함이 사라졌는데, 과거에 선물한 이력은 어떻게 확인할 수 있나요? <i class="fas fa-angle-down"></i></dt>
+        <dd>Gift배송하기 서비스에서 ‘배송지 입력’을 기준으로 주문내역이 노출되었던 것과는 달리, 온라인 스토어 서비스에서는 ‘결제’를 기준으로 주문내역이 노출됩니다. 따라서, 과거에 보내신 선물의 경우 스타벅스 앱 [Shop > 쇼핑하러 가기 > 마이페이지 > 주문내역]에서 확인하실 수 있습니다.아울러, 스타벅스 온라인 스토어의 [선물함]에는 다른 사람으로부터 선물 받은 내역만 노출됩니다.
+          - 주문내역: 결제한 주문 내역 (구매하기/선물하기) 
+          - 선물함: 선물 받은 내역 (선물받기)</dd>
+        <dt>[온라인 스토어] 보낸 선물함이 사라졌는데, 과거에 선물한 이력은 어떻게 확인할 수 있나요? <i class="fas fa-angle-down"></i></dt>
+        <dd>Gift배송하기 서비스에서 ‘배송지 입력’을 기준으로 주문내역이 노출되었던 것과는 달리, 온라인 스토어 서비스에서는 ‘결제’를 기준으로 주문내역이 노출됩니다. 따라서, 과거에 보내신 선물의 경우 스타벅스 앱 [Shop > 쇼핑하러 가기 > 마이페이지 > 주문내역]에서 확인하실 수 있습니다.아울러, 스타벅스 온라인 스토어의 [선물함]에는 다른 사람으로부터 선물 받은 내역만 노출됩니다.
+          - 주문내역: 결제한 주문 내역 (구매하기/선물하기) 
+          - 선물함: 선물 받은 내역 (선물받기)</dd>
+        <dt>[온라인 스토어] 보낸 선물함이 사라졌는데, 과거에 선물한 이력은 어떻게 확인할 수 있나요? <i class="fas fa-angle-down"></i></dt>
+        <dd>Gift배송하기 서비스에서 ‘배송지 입력’을 기준으로 주문내역이 노출되었던 것과는 달리, 온라인 스토어 서비스에서는 ‘결제’를 기준으로 주문내역이 노출됩니다. 따라서, 과거에 보내신 선물의 경우 스타벅스 앱 [Shop > 쇼핑하러 가기 > 마이페이지 > 주문내역]에서 확인하실 수 있습니다.아울러, 스타벅스 온라인 스토어의 [선물함]에는 다른 사람으로부터 선물 받은 내역만 노출됩니다.
+          - 주문내역: 결제한 주문 내역 (구매하기/선물하기) 
+          - 선물함: 선물 받은 내역 (선물받기)</dd>
+        <dt>[온라인 스토어] 보낸 선물함이 사라졌는데, 과거에 선물한 이력은 어떻게 확인할 수 있나요? <i class="fas fa-angle-down"></i></dt>
+        <dd>Gift배송하기 서비스에서 ‘배송지 입력’을 기준으로 주문내역이 노출되었던 것과는 달리, 온라인 스토어 서비스에서는 ‘결제’를 기준으로 주문내역이 노출됩니다. 따라서, 과거에 보내신 선물의 경우 스타벅스 앱 [Shop > 쇼핑하러 가기 > 마이페이지 > 주문내역]에서 확인하실 수 있습니다.아울러, 스타벅스 온라인 스토어의 [선물함]에는 다른 사람으로부터 선물 받은 내역만 노출됩니다.
+          - 주문내역: 결제한 주문 내역 (구매하기/선물하기) 
+          - 선물함: 선물 받은 내역 (선물받기)</dd>
+        <dt>[온라인 스토어] 보낸 선물함이 사라졌는데, 과거에 선물한 이력은 어떻게 확인할 수 있나요? <i class="fas fa-angle-down"></i></dt>
+        <dd>Gift배송하기 서비스에서 ‘배송지 입력’을 기준으로 주문내역이 노출되었던 것과는 달리, 온라인 스토어 서비스에서는 ‘결제’를 기준으로 주문내역이 노출됩니다. 따라서, 과거에 보내신 선물의 경우 스타벅스 앱 [Shop > 쇼핑하러 가기 > 마이페이지 > 주문내역]에서 확인하실 수 있습니다.아울러, 스타벅스 온라인 스토어의 [선물함]에는 다른 사람으로부터 선물 받은 내역만 노출됩니다.
+          - 주문내역: 결제한 주문 내역 (구매하기/선물하기) 
+          - 선물함: 선물 받은 내역 (선물받기)</dd>
+        <dt>[온라인 스토어] 보낸 선물함이 사라졌는데, 과거에 선물한 이력은 어떻게 확인할 수 있나요? <i class="fas fa-angle-down"></i></dt>
+        <dd>Gift배송하기 서비스에서 ‘배송지 입력’을 기준으로 주문내역이 노출되었던 것과는 달리, 온라인 스토어 서비스에서는 ‘결제’를 기준으로 주문내역이 노출됩니다. 따라서, 과거에 보내신 선물의 경우 스타벅스 앱 [Shop > 쇼핑하러 가기 > 마이페이지 > 주문내역]에서 확인하실 수 있습니다.아울러, 스타벅스 온라인 스토어의 [선물함]에는 다른 사람으로부터 선물 받은 내역만 노출됩니다.
+          - 주문내역: 결제한 주문 내역 (구매하기/선물하기) 
+          - 선물함: 선물 받은 내역 (선물받기)</dd>
+        <dt>[온라인 스토어] 보낸 선물함이 사라졌는데, 과거에 선물한 이력은 어떻게 확인할 수 있나요? <i class="fas fa-angle-down"></i></dt>
+        <dd>Gift배송하기 서비스에서 ‘배송지 입력’을 기준으로 주문내역이 노출되었던 것과는 달리, 온라인 스토어 서비스에서는 ‘결제’를 기준으로 주문내역이 노출됩니다. 따라서, 과거에 보내신 선물의 경우 스타벅스 앱 [Shop > 쇼핑하러 가기 > 마이페이지 > 주문내역]에서 확인하실 수 있습니다.아울러, 스타벅스 온라인 스토어의 [선물함]에는 다른 사람으로부터 선물 받은 내역만 노출됩니다.
+          - 주문내역: 결제한 주문 내역 (구매하기/선물하기) 
+          - 선물함: 선물 받은 내역 (선물받기)</dd>
+        <dt>[온라인 스토어] 보낸 선물함이 사라졌는데, 과거에 선물한 이력은 어떻게 확인할 수 있나요? <i class="fas fa-angle-down"></i></dt>
+        <dd>Gift배송하기 서비스에서 ‘배송지 입력’을 기준으로 주문내역이 노출되었던 것과는 달리, 온라인 스토어 서비스에서는 ‘결제’를 기준으로 주문내역이 노출됩니다. 따라서, 과거에 보내신 선물의 경우 스타벅스 앱 [Shop > 쇼핑하러 가기 > 마이페이지 > 주문내역]에서 확인하실 수 있습니다.아울러, 스타벅스 온라인 스토어의 [선물함]에는 다른 사람으로부터 선물 받은 내역만 노출됩니다.
+          - 주문내역: 결제한 주문 내역 (구매하기/선물하기) 
+          - 선물함: 선물 받은 내역 (선물받기)</dd>
+      </dl>
+    </form>
+  </section>
+</main>
+<!-- 푸터 -->
+<footer></footer>
+<!-- 자바스크립트 -->
+<script>
+  //변수선언
+  let q = document.querySelectorAll('.qna dt');
+  let n = 0;
+  //let arrow = document.querySelectorAll('.fas');
+
+  //반복문
+  q.forEach((el) =>{
+    el.addEventListener('click',function(){ //alert('클릭');
+      if(n==0){
+        el.nextElementSibling.style.display='block'; //옆의 형제 요소 nextElementSibling
+        this.querySelector('i.fas').classList.add('act');
+        n=1;
+      }else{
+        el.nextElementSibling.style.display='none'; 
+        this.querySelector('i.fas').classList.remove('act');
+        n=0;
+      };
+    });
+  });
+</script>
+</body>
+</html>

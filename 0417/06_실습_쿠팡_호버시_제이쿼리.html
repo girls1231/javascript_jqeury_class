@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>쿠팡 메인슬라이드 구현하기</title>
+  <style>
+    *{padding: 0; margin: 0;}
+    ul, li{list-style: none;}
+    header{text-align: center; background-color: #ccc; height: 70px;}
+    header h1 img{width: 250px;padding-top: 10px;}
+
+    /* 슬라이드 */
+    .slide{position: relative;}
+    .slide_wrapper div{display:none;}
+    .slide_wrapper div:first-child{display: block;}
+
+    .lnb{position: absolute; right: 10px; top: 140px; z-index: 10;}
+    .lnb > ul{}
+    .lnb > ul > li{border: 1px solid white;}
+    .lnb > ul > li:hover{border: 1px solid tomato;} /*outline: 1px solid tomato : 라인을 바깥으로 줘서 덜렁거리지 않게 해도 되겠다*/
+    .lnb > ul > li >a{}
+    .lnb img{display: block;}
+    .act{border: 2px solid #4285f4 !important;}
+  </style>
+    <!-- 제이쿼리 연결 -->
+<!-- 1. 제이쿼리 직접 연결하기 -->
+<script src="./script/jquery-3.7.1.min.js"></script> <!--최적화 버전 min  -->
+<!-- 2. JQUERY.COM에서 CND방식으로 연결 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<!-- 제이쿼리 랩퍼 -->
+<script>
+  $(document).ready(function(){
+    let img = $('.gnb li img');
+
+    let img_url;
+
+    img.mouseenter(function(){
+      img_url = $(this).attr('alt'); //console.log(img_url);
+      $('#big_img').attr('src',img_url);
+    });
+  });
+</script>
+</head>
+<body>
+  <h2>쿠팡 메인슬라이드 구현하기</h2>
+<!-- 헤더 -->
+  <header>
+    <h1>
+      <a href="index.html" title="메인페이지로 이동하기">
+        <img src="./images/coupanglogo.png" alt="상단로고">
+      </a>
+    </h1>
+  </header>
+
+<!-- 메인 -->
+  <main>
+    <article >
+      <nav class="lnb">
+        <ul class="gnb">
+          <li><img src="./images/01.jpg" alt="./images/banner1.jpg" >
+          <li><img src="./images/02.jpg" alt="./images/banner2.png">
+          <li><img src="./images/03.jpg" alt="./images/banner3.jpg">
+          <li><img src="./images/04.png" alt="./images/banner4.jpg">
+          <li><img src="./images/05.jpg" alt="./images/banner5.jpg">
+          <li><img src="./images/06.png" alt="./images/banner6.jpg">
+          </a></li>
+        </ul>
+      </nav>
+        <div class="slide_wrapper">
+          <div class="slide"><img src="./images/banner1.jpg" alt="메인배너" id="big_img"></div>
+        </div>
+    </article>
+  </main>
+<!-- 푸터 -->
+  <footer>
+
+  </footer>
+</body>
+</html>

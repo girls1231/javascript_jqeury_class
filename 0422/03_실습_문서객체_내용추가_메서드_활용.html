@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실습_실시간 검색순위</title>
+  <style>
+    .box{width: 350px; background-color: #ccc;}
+    .b_inner{padding: 20px}
+    .b_inner >h3{ border-bottom: 2px solid brown; padding-bottom: 10px; margin-bottom: 20px; color: brown;}
+    .b_inner > ul{height: 160px; border: 1px solid #00f;}
+    .b_inner > ul > li{list-style: none;}
+    .b_inner > ul > li:first-child a{font-weight: bold; font-size: 18px; line-height: 1.4em;}
+    .b_inner ul li:nth-child(2) a{font-size: 16px; line-height: 1.4em; margin-top: 4px;}
+    .b_inner > ul > li >a{color: #222; text-decoration: none; font-size: 13px; line-height: 2em; display: inline-block;}
+  </style>
+</head>
+<body>
+  <h2>실습_내용추가 메서드_실시간 검색순위/예매순위/판매순위/랭킹</h2>
+  
+  <div class="box">
+    <article class="b_inner">
+      <h3>실시간 검색순위</h3>
+      <ul>
+        <li><a href="#" title="">keyword1</a></li>
+        <li><a href="#" title="">keyword2</a></li>
+        <li><a href="#" title="">keyword3</a></li>
+        <li><a href="#" title="">keyword4</a></li>
+        <li><a href="#" title="">keyword5</a></li>
+        <li><a href="#" title="">keyword6</a></li>
+      </ul>
+    </article>
+  </div>
+
+  <h3>시간객체</h3>
+  <p>setInterval(함수명, 반복할시간); 일정 시간마다 함수나 내용을 반복호출하여 실행</p>
+  <p>setTimeout(sodyd, 반복할시간); 일정 시간지난 후 함수를 호출하여 한번 내용 실행</p>
+
+  <!-- 제이쿼리 연결 -->
+<!-- 1. 제이쿼리 직접 연결하기 -->
+<script src="./script/jquery-3.7.1.min.js"></script> <!--최적화 버전 min  -->
+<!-- 2. JQUERY.COM에서 CND방식으로 연결 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+  <script>
+$(document).ready(function(){
+
+  setInterval(function(){ 
+
+    let boxIn = $('.b_inner ul'); //키워드 목록
+    let boxRow = $('.b_inner ul li:first-child');// 첫번째 li 태그
+
+    let print = ()=>{boxRow.appendTo(boxIn).show(300); }// 첫째 li 태그를 ul태그의 안쪽 마지막 요소의 자리로 배치하겠다
+
+    boxRow.hide(300,print); //목록안에 첫번째 li태그를 뒤로 보내고 나서 원래 위치에 있는건 지워라
+
+  }, 3000); //3초마다 print를 호출해라
+
+});
+  </script>
+
+  <H3>실습예제_네이버 뉴스</H3>
+  <div class="news">
+    <article class="n_inner">
+      <h3>연합뉴스</h3>
+      <ul>
+        <li><a href="#" title="">尹대통령, 새 비서실장에 정진석 임명" 원만한 소통 기대"</a></li>
+        <li><a href="#" title="">용산 '구원투수'에 첫 정치인 비서실장…'소통·정무' 강화에 방점</a></li>
+        <li><a href="#" title="">尹대통령 "여당뿐 아니라 야당 관계도 더 설득·소통하는데 주력"</a></li>
+        <li><a href="#" title="">정부 "의대 교수 사직서 수리 예정된 사례 없어…대화 나와달라" </a></li>
+        <li><a href="#" title="">한동훈, 尹과 미묘한 거리두기…'마이웨이' 모색하나 </a></li>
+        <li><a href="#" title="">가자전쟁 재격화 예고…이스라엘·이란 갈등 '풍선효과' </a></li>
+        <li><a href="#" title="">"나체사진 유포한다" 채무자 협박한 '89,530%' 고금리 대부업자 </a></li>
+        <li><a href="#" title="">이화영 "검사가 檢출신 전관변호사 연결해 회유"…옥중서신 폭로  </a></li>
+        <li><a href="#" title="">"남편이 죽었어요"…112 대신 장례업체에 전화한 아내</a></li>
+        <li><a href="#" title="">"제육볶음 4만4000원"…뉴욕 한복판에 자리 잡은 '기사 …</a></li>
+      </ul>
+    </article>
+  </div>
+
+  <p> text-overflow: ellipsis; white-space: nowrap; overflow: hidden; /*말줄임표 만드는 방법*/</p>
+
+  <style>
+    .news{width: 400px; border: 3px solid palevioletred; background-color: pink;border-radius: 10px; }
+    .n_inner{width: max-content;display: flex; }
+    .n_inner > h3{font-size: 15px; padding: 10px;position: relative;}
+    .n_inner > h3::after{
+      content: ""; width: 2px; height: 20px; background-color: #222; 
+      position: absolute; top:0 px; left: 80px;}
+    .n_inner > ul{height: 40px;width: 250px;  overflow: hidden; border-radius: 10px; background-color: white; padding: 5px; margin: 10px 30px; }
+    .n_inner > ul > li{ 
+      list-style: none; line-height: 40px;
+      text-overflow: ellipsis; white-space: nowrap; overflow: hidden; /*말줄임표 만드는 방법*/
+    }
+    .n_inner > ul > li >a{text-decoration: none; color: #333;}
+    .n_inner > ul > li >a:hover{text-decoration: underline;}
+  </style>
+
+  <script>
+    $(document).ready(function(){
+
+    setInterval(function(){
+      let news = $('.n_inner ul');
+      let n_title = $('.n_inner ul li:first-child');
+
+      function rank(){n_title.appendTo(news).show(300);};
+      n_title.hide(300,rank);
+
+    },3000);  
+    });
+  </script>
+</body>
+</html>

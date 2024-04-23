@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제이쿼리 이벤트</title>
+  <head>
+<!-- 제이쿼리 연결 -->
+<!-- 1. 제이쿼리 직접 연결하기 -->
+<!-- <script src="./script/jquery-3.7.1.min.js"></script> 최적화 버전 min  -->
+<!-- 2. JQUERY.COM에서 CND방식으로 연결 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+
+<style>
+  /* input{border-style: hidden;} */
+  input{outline: none;}
+  a{color: #333; text-decoration: none;}
+  .lnb li:first-child a{text-decoration: underline; font-weight: bold;} /*시작하자마자 처음에는 글자가 진하게 나와야 하니까!*/
+</style>
+
+<!-- 제이쿼리 랩퍼 -->
+<script>
+    $(document).ready(function(){
+    /*
+    let btn = document.querySelector('.list01');
+    btn.addEventListener('click',function(){
+      this.style.backgroundColor = '#ff0';
+    });*/
+  
+    
+    $('.list01').click(function(){
+      $(this).css('background','#ff0');
+    });
+
+    //2. dblclick
+    $('.list02').dblclick(function(){
+      $(this).css('background','#ff0');
+    });
+
+    //3. mouse enter
+    $('.list03').mouseenter(function(){
+      $(this).css('border','3px double #00f');
+    });
+
+    //4. mouse leave
+    $('.list04').mouseleave(function(){
+      $(this).css('background','#ff0');
+    });
+
+    //5. hover
+    $('.list05').mouseleave(function(){
+      $(this).css('background','#ff0');
+    },function(){
+      $(this).css('background','none');
+    });
+
+    //6. 다중이벤트 - 더블 클릭시 글자에 빨강, 배경에 초록
+    $('h3').on('click dblclick', function(){
+      $(this).css({
+        'color':'#f00',
+        'background':'#0f0'
+      });
+    });
+
+    //7. focusin,focusout 이벤트
+    $('input').focusin(function(){
+      $(this).css('border','1px solid #00f');
+    });
+    $('input').focusout(function(){
+      $(this).css('border','1px solid #ccc');
+    });
+
+    //8. toggle 이벤트 - 누를 때마다 몇번이고 실행 / 1.8버전 이하에서만 적용 가능
+    $('.list06').toggle(function(){
+      $(this).css('background','red');
+    },function(){
+      $(this).css('background','orange');
+    },function(){
+      $(this).css('background','yello');
+    },function(){
+      $(this).css('background','green');
+    },function(){
+      $(this).css('background','skyblue');
+    },function(){
+      $(this).css('background','navy');
+    },function(){
+      $(this).css('background','purple');
+    });
+
+    //9. 
+    
+  });
+</script>
+</head>
+<body>
+  <h2>03제이쿼리 이벤트</h2>
+  <p>웹문서에서 버튼을 클릭한다거나 마우스를 움직이거나 하는 모든 행위를 이벤트라고 한다. 그리고 이벤트 발생시 함수의 실행문이 수행되도록 이벤트를 지정하는 것을 '이벤트 핸들러'라고 한다</p>
+
+  <h3>1. 이벤트의 종류</h3>
+  <ul>
+    <li>마우스 이벤트</li>
+    <li>키보드 이벤트</li>
+    <li>포커스 이벤트</li>
+    <li>폼양식 이벤트</li>
+    <li>윈도우 이벤트</li>
+  </ul>
+
+  <h3>2. 이벤트를 등록하는 방법(작성법)</h3>
+  <ul>
+    <li>단독이벤트 - $('이벤트 대상').이벤트 메서드(function(){실행할 내용});</li>
+    <li>그룹이벤트 - $('이벤트 대상').on('이벤트 종류1','이벤트 종류2'.....,function(){실행할 내용});</li>
+  </ul>
+
+  <h3>3. 마우스 이벤트와 폼양식 이벤트</h3>
+  <ol>
+    <li class="list01">click - 마우스로 대상을 클릭 할 때 이벤트 실행</li>
+    <li class="list02">dbclick - 마우스로 대상을 더블클릭 할 때 이벤트 실행</li>
+    <li class="list03">mouseenter - 마우스로 대상을 오버할 때 이벤트 실행(=mouseover)</li>
+    <li class="list04">mouseleave - 마우스로 대상을 오버했다가 뺐을 때 이벤트 실행(=mouseout)</li>
+    <li class="list05">hover - 마우스로 디상을 오버했을 때와 뺐을 대 둘다 각각 따로 이벤트 내용 실행</li>
+    <li>focus - 마우스로 클릭하여 포커스가 발생되었을 대 이벤트 발생(양식에서)</li>
+    <li>blur - 폼양식에서 포커스가 해제되었을 대 발생</li>
+    <li class="list06">toggle - 대상 요소를 클릭시마다 지정된 함수를 호출하여 실행</li>
+    <li>each -  개별(각각에 대해)처리하는 이벤트 함수</li>
+  </ol>
+
+  <h3>예제7. 폼태그를 사용하여 양식 이벤트 사용하기</h3>
+  <fieldset>
+    <legend>로그인 폼</legend>
+    <p><label for="id_txt">아이디 : </label><input type="text" id="id_txt"></p>
+    <p><label for="pw_txt">패스워드 : </label><input type="text" id="pw_txt"></p>
+  </fieldset>
+
+  <h3>예제9. each 함수를 사용하여 탭메뉴 서식 적용하기</h3>
+  <nav class="lnb">
+    <ul>
+      <li><a href="#" title="">힐링의 성지</a></li>
+      <li><a href="#" title="">불이 꺼지지 않는 도시</a></li>
+      <li><a href="#" title="">동남아 휴양지</a></li>
+    </ul>
+  </nav>
+
+  <script>
+    $(document).ready(function(){
+      //변수 선언
+      let lnb = $('.lnb > ul > li > a');
+      
+      //a요소에 각각 같은 기능 적용
+      lnb.each(function(){
+        $(this).click(function(e){
+          
+          e.preventDefault(); //a태그의 새로고침(위로올라가는 현상)방지
+          
+          lnb.css({
+            'font-weight':'normal',
+            'text-decoration' : 'none'});
+          $(this).css({
+            'font-weight':'bold', 
+            'text-decoration':'underline'});
+        });
+      });
+    });
+  </script>
+</body>
+</html>

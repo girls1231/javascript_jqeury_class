@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02_제이쿼리 문서객체(dom)조작</title>
+  <style>
+    .top_sale *{margin: 0;padding: 0;}
+    .top_sale{width: 690px; height: 490px; position: relative;border: 3px solid #00f;}
+    .top_sale > h4{line-height: 50px;}
+    .top_sale li{list-style: none;}
+    .top_sale a{text-decoration: none; color: #fff;line-height: 70px;}
+    .top_sale a:hover{text-decoration: underline;}
+    .top_sale nav{position: absolute; top: 50px; right: 0px; width: 300px; height: 444px; background-color: #1960cb;}
+  </style>
+</head>
+<body>
+  <h2>02_제이쿼리 문서객체(dom)조작</h2>
+  <p>dom(문서객체모델), html 문서안에서 모든 요소들과 내용들을 제이쿼리를 사용하여 글자를 변경하거나, 추가, 삭제, 속성값을 변경할 수 있는 것을 말한다.</p>
+  <p>http://oscarotero.com/jquery 웹사이트 참고. API에서 attributes(속성), manipulation(조작) 카테고리에서 메소드 확인 가능</p>
+ 
+  
+  <h3>문서내용을 변경하기 위한 메서드 종류</h3>
+
+  <p>클래스 조작(removeClass, toggleClass, addClass, hasClass)</p>
+  <p>속성 조작 (attr)</p>
+  <p>내용 조작 (text, html)</p>
+  <p></p>
+  
+  <ul>
+    <li>$('대상').text(); - 텍스트 내용을 변경하기 위한 메서드</li>
+    <li>$('대상').html(); - html 태그를 포함하여 텍스트 내용 변경</li>
+    <li>$('대상').attr(); - 속성이나 속성값을 변경</li>
+    <li>$('대상').val(); - 선택요소 폼태그 value 값을 변경</li>
+    <li>$('대상').empty(); -  선택요소 내용 지우기</li>
+    <li>$('대상').remove(); -  선택요소를 지우기  (js에서는 classList.add)</li>
+    <li>$('대상').revoveClass(); - 클래스 제거    (js에서는 classList.remove)</li>
+    <li>$('대상').hasClass(); - 클래스 존재여부</li>
+    <li>$('대상').toggleClass(); - 클래스 적용, 제거</li>
+    <li>$('대상').appendTo(); - 부모내용 마지막 위치로 이동(자리바꾸기)</li>
+    <li>$('대상').prependTo(); - 부모내용 처음 위치로 이동(자리바꾸기)</li>
+    <li>$('A').insertAfter('B'); -  B 요소 뒤에 A를 배치 (B - A)</li>
+    <li>$('A').insertBefore('B'); -  B 요소 앞에 A를 배치 (A - B)</li>
+  </ul>
+
+  <h3>1. 자바스크립트_내용 삽입하여 출력하기</h3>
+  <p id="p01">자바스크립트 활용하여 이곳에 내용이 출력됩니다.</p>
+  <p id="p01_1"></p>
+
+  <h3>2. 제이쿼리_내용삽입하여 출력하기</h3>
+  <p id="p02">제이쿼리로 내용을 변경 합니다</p>
+  <p id="p03">제이쿼리로 html 내용을 추가합니다</p>
+
+  <h3>3. attr(); 메서드에서 로고이미지 바꾸기</h3>
+  <img src="./images/logo_baskinrobbins.png" alt="베스킨라빈스" id="logo">
+  <input type="button" value="클릭시 로고변경" id="btn01">
+
+  <h3>4. attr(); 메서드 활용 _ 링크를 클릭/오버했을  때 그림나오게</h3>
+  <article class="top_sale">
+    <h4>모두투어 판매랭킹 No.1</h4>
+    <nav>
+      <ul>
+        <li><a href="./images02/tour01.jpg" title="">[두바이] 아부다비 6/7일[기간한정특가]</a></li>
+        <li><a href="./images02/tour02.jpg" title="">[북해도 3대 온천] 맛있는 온천 4일</a></li>
+        <li><a href="./images02/tour03.jpg" title="">[코타키나발루]초특급 수트라하버 5일</a></li>
+        <li><a href="./images02/tour04.jpg" title="">[괌] PIC 리조트 4/5일</a></li>
+      </ul>
+    </nav>
+    <img src="./images02/tour01.jpg" alt="" id="tour_img">
+  </article>
+  <script src="./script/jquery-3.7.1.min.js"></script> <!--최적화 버전 min  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script>
+    //1. 자바스크립트_내용 삽입하여 출력하기
+    document.getElementById('p01').innerText = 'innerText: 일반 텍스트를 삽입합니다';
+    document.getElementById('p01_1').innerHTML = 'innerHTML: <a href="#">태그를 포함하여 텍스트를 삽입합니다</a>';
+
+
+    //2. 제이쿼리_내용삽입하여 출력하기
+    $(document).ready(function(){
+      $('#p02').text('제이쿼리로 텍스트 삽입하기');
+      $('#p03').html('<a href="#" title="">태그 포함하여 삽입하기</a>');
+
+
+      //3.attr(); 메서드에서 로고이미지 바꾸기 
+      $('#btn01').mouseenter(function(){
+        $('#logo').attr('src','https://www.tlj.co.kr/static/images/common/logo.png');
+      });
+
+      //사진을 여러번 바꾸고 싶다면 조건을 써서 바꾸자
+      // $('#btn01').mouseenter(function(){
+      //   if(조건1==''){$('#logo').attr('src','https://www.tlj.co.kr/static/images/common/logo.png');}
+      //   else if(조건2==''){$('#logo').attr('src','https://www.tlj.co.kr/static/images/common/logo.png');}
+      // });
+
+      //마우스 클릭했을 때 a에 담긴 href값(속성값)을 변수에 담아서, 이미지의 주소를 바꾼다
+      // 변수 선언
+      let mnu = $('.top_sale a');
+      // 마우스 오버 했을 때 a에 담긴 href값(속성값)을 변수에 담기
+      let img_url;
+      mnu.mouseenter(function(){
+        img_url = $(this).attr('href');        //console.log(img_url); 찍어보기
+        $('#tour_img').attr('src',img_url); //이미지 src 속성 값에 img_url 변수 값을 넣는다
+      });
+      mnu.click(function(e){
+      e.preventDefault(); //클릭이벤트인 경우에는 a요소의 링크 기능을 무력화: e.preventDefault(); 
+      });
+    });
+
+  </script>
+</body>
+</html>

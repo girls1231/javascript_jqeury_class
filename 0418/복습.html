@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./script/jquery-3.7.1.min.js"></script> <!--최적화 버전 min  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <style>
+    .circle{width: 100px; height: 100px; border-radius: 50%; background-color: #FF7F50;text-align: center;line-height: 100px;
+    position: relative;}/*움직임 주려면 무조건 포지션 준다!*/
+    #tube{position: relative;} /*움직임 주려면 무조건 포지션 준다!*/
+    /* 마우스오버 동작 애니메이션 : transition  // 자동으로 움직이는 애니메이션 : @keyframe{0%~ 내용} */
+  </style>
+  <script>
+    $(document).ready(function(){
+      const c = $('.circle');
+      $('#start_btn').click(function(){c.animate({'left':'800px'});});
+      $('#stop_btn').click(function(){c.stop;});
+
+
+    const move = 50;
+    $('#l_btn').click(function(){$('#tube').animate({'left':'-='+move})});
+
+    });
+  </script>
+
+</head>
+<body>
+  <h3>2. animate 메서드를 사용하여 박스를 움직이게 하기</h3>
+  <div class="circle">원</div>
+  <input type="button" value="애니메이션 시작" id="start_btn">
+  <input type="button" value="애니메이션 종료" id="stop_btn">
+
+  <h3>3. 자바스크립트 절대값을 활용하여 캐릭터 움직이기(방향키)</h3>
+  <img src="./images/KakaoTalk.gif" alt="카카오캐릭터" id="tube">
+  <input type="button" id="l_btn" value="&#x2190;">
+  <input type="button" id="r_btn" value="&#x2192;">
+  <input type="button" id="t_btn" value="&#x2191;">
+  <input type="button" id="b_btn" value="&#x2193;">
+
+  <h3>4. box에 마우스 오버시 순차적으로 애니메이션 적용하기</h3>
+
+  <h3>5. easing 값 활용하여 속도감 있는 애니메이션 적용하기</h3>
+
+  <h3>애플 실습  </h3>
+  <div class="box">
+    <img src="./exec01/images/jobs_text.gif" alt="" id="title">
+    <img src="./exec01/images/jobs.png" alt="" id="img">
+  </div>
+</body>
+</html>

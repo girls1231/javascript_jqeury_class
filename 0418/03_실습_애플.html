@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./script/jquery-3.7.1.min.js"></script> <!--제이쿼리 최적화 버전 min  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script><!--제이쿼리  -->
+  <!-- 제이쿼리 이징 --> <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+  <style>
+    .box{padding: 0px; margin: 0px; width: 500px; height: 300px; border: 4px solid black;position: relative; overflow: hidden;}
+    #title{position: absolute; left: -100px; top: 100px; }
+    #img{position: absolute; right: 0px;bottom:-100%;}
+  </style>
+  <script>
+    $(document).ready(
+      
+
+      function(){
+        $('#title').animate({'left':'10px', 'top': '100px'},400);
+        $('#img').animate({'right':'0px', 'bottom': '0px'},450);           
+      }
+    );
+  </script>
+</head>
+<body>
+  <div class="box">
+    <img src="./exec01/images/jobs_text.gif" alt="" id="title">
+    <img src="./exec01/images/jobs.png" alt="" id="img">
+  </div>
+</body>
+</html>

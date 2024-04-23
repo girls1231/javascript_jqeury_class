@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모달띄우기_오늘하루열지않음</title>
+  <style>
+    .modal{background-color: rgba(0,0,0,0.8); position: absolute; top: 0; width: 100%; height: 100%;}
+    .modal .m_inner{position: relative; top: 40%; left: 40%;  width: 499px;} 
+    #c_btn{float: right;border: none;background-color:transparent; color: white; font-size: 16px; cursor: pointer; position: relative; top: -530px;}
+    .modal .m_inner label{color: white;font-size: 16px;cursor: pointer;position: relative; top: -530px;}
+    .modal .m_inner input[type=checkbox]{display: none;} 
+
+  </style>
+  <!--제이쿼리  -->
+  <script src="./script/jquery-3.7.1.min.js"></script> <!--최적화 버전 min  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <!-- 제이쿼리 쿠키파일 -->
+  <script src="/04_jquery/jquery.cookie.js"></script>
+  <script>
+    $(document).ready(function(){
+      //변수선언
+      let modal =` 
+      <div class='modal'>
+        <div class="m_inner">
+          <a href="#" title=""><img src="./popup.jpg" alt="banner"></a>
+          <input type="checkbox" id="ch"><label for="ch">오늘 하루 열지 않음</label>
+          <input type="button" value="닫기" id="c_btn">
+        </div>
+      </div>
+      `;
+      $('body').append(modal); //body에 모달창을 추가해라
+
+      let ch = $('#ch'); //변수담기
+
+      if($.cookie('popup')=='none'){$('.modal').hide();}; //현재 사용자가 브라우저에서 쿠키정보가 있다면 모달창이 안나오게 해야한다
+
+      function close_popup(){ //함수 : 체크박스를 체크하고 닫기 버튼을 누르면 모달창이 닫힘
+        if(ch.is(':checked')){ //체크가 된 경우라면
+          $.cookie('popup','none',{expires:1,path:'/'})//쿠키정보가 1일간 '/'안에 저장되어야 한다.
+          $('.modal').hide();
+        }else{
+          $('.modal').hide(); //체크가 되지 않았다면, 쿠키정보를 생성하지 않고 그냥 닫기
+        };
+      };
+
+      $('#c_btn, #ch').click(function(){close_popup();});   //닫기 버튼 눌렀을 때 함수 호출
+
+
+    });
+  </script>
+</head>
+<body>
+  <dl>
+    <dt>모달 윈도 == 팝업레이어</dt>
+    <dd>모달 윈도는 사용자 인터페이스 디자인 개념에서 자식 윈도에서 부모 윈도우로 돌아가기 전에 사용자의 상호동작을 요구하는 창을 말한다.</dd>
+    <dd>모달 윈도우는 부모창을 배경으로 어둡게하고 자식요소가 화면의 가운데 중앙에 배치하도록 하며, 오른쪽 상단(이미지 배너 아래)에 만들어서 닫을 수 있도록 한다.</dd>
+  </dl>
+
+  <h3>제이쿼리 쿠키 플러그인</h3>
+  <p>쿠키 : 서버에서 클라이언트에게 특정 정보를 저장하는 데이터</p>
+  <p>사용자 이름, 아이디, 방문횟수 등을 기록하여 차후 접속시 활용</p>
+  <p>제이쿼리 쿠키 사용법 <br>
+   $.cookie('쿠키이름','쿠키값',{expires:만료일, path:'저장경로'});</p>
+   <p>제이쿼리 쿠키는 쿠키플러그인 파일을 다운로드하여 연결 후 작성한다</p>
+   <p>http://plugins.jquery.com/cookie</p>
+
+   <ul>
+    <li>expires:1 하루</li>
+    <li>분단위 생성<br>
+    var date =  new Date(); <br>
+    date.setTime(date.getTime()+ 1*60*1000); //1분 <br>
+    $.cookie('popup','none',{expires:1,path:'/'})</li>
+   </ul>
+</body>
+</html>

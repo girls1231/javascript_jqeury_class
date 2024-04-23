@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01_제이쿼리_문서조작실습_카카오톡_채팅창</title>
+  <style>
+    .wrap *{margin: 0px; padding: 0px;}
+    .wrap{width: 400px; margin: 60px 0 0 10px; box-shadow: 0 2px 4px #ccc;}
+    header{background-color: #fff;padding: 30px 87px 8px 8px; position: relative;height: 110px;}
+    header .btn{width: 12px; height: 12px; border-radius: 50%; border: none; position: absolute; top: 8px; cursor: pointer;}
+    header #close{background-color: #ff6059; left: 8px;}
+    header #minbtn{background-color: #ffbf2f; left: 26px;}
+    header #maxbtn{background-color: #29cd42; left: 44px;}
+    header img{width: 80px; border: 1px solid #ccc; border-radius: 10px; position: relative; top: 30px; left: 8px;vertical-align: middle;}
+    header span{font-weight: bold; font-size: 14px; margin-left: 5px;}
+    /* 채팅창 서식 chatbox*/
+    .chatbox{height: 400px; background-color: #d7e4f2; padding: 10px; position: relative; overflow-y: scroll;}
+    /* 말풍선 서식 */
+    .chatbox >div{
+      margin: 5px 0;
+      max-width: 300px;
+      font-size: 14px;
+      display: inline-block;
+      position: relative;
+    }
+    .bubble1{background-color: #fff;border-radius: 14px 14px 14px 0; padding: 5px;float: left; clear: both;}
+    .bubble2{background-color: #fff46d;border-radius: 14px 14px 0 14px; padding: 5px;float: right;clear: both;} /*플로트 하면 따라오니까 방지하기 위해 clear*/
+    .txt_box{background-color: #fafafa; padding: 10px; display: flex;}
+    .txt_box textarea{height: 60px; width: calc(92% - 50px); border-radius: 2%; background-color: #fff;border: 0.5px solid #d7d7d7; resize: none; padding: 10px; font-size: 14px; box-sizing: border-box;}
+    #send{width: 50px;background-color: #4a90e2; width: 60px; height: 60px; border: none; color: #fff; margin-left: 10px;}
+  </style>
+  <!--제이쿼리  -->
+  <script src="./script/jquery-3.7.1.min.js"></script> <!--최적화 버전 min  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      let talk; // 변수선언
+      let send = $('.txt_box #send'); //버튼 변수 선언
+
+      
+      //버튼 클릭시 이벤트 발생
+      send.click,(function(){talk_print(); });
+    
+    //엔터키를 누르면 내용이 삽입되게
+    $('.wrap').keydown(function(e){if(e.keyCode == 13){talk_print();}});
+      
+      //글 내용 출력 함수
+      function talk_print(){
+        talk = $('textarea').val();
+      //텍스트 박스에 내용을 입력했는가?
+        if(talk==''){ //내용이 없다면
+          send.attr('disabled',false);//버튼 비활성화
+        }else{
+          $('textarea').val(''); //내용은 지우고
+          $('textarea').focus(); //커서가 항상 있게끔
+          $('.chatbox').append('<div class="bubble2">'+talk+'</div>');//내용이 채팅창에 입력된다       
+      };
+    };
+  });
+  </script>
+</head>
+<body>
+  <h2>01_제이쿼리_문서조작실습_카카오톡_채팅창</h2>
+  <p>채팅창 입력양식을 삽입하여 사용자가 글내용 입력후 '전송'버튼 클릭시 글내용이 대화상자에 출력되게 하기</p>
+
+  <ul>
+    <li>채팅창 화면을 header, main, footer영역으로 구성한다</li>
+    <li>상단 header 영역은 브라우저버튼, 사용자 프로필영역, 소개글 작성</li>
+    <li>main영역은 상대방과 사용자가 입력한 글 내용이 말풍선으로 출력</li>
+    <li>footer 영역은 사용자가 입력양식에 글을 입력하고 버튼 클릭시 변수에 담아서 내용을 출력하도록 한다</li>
+    <li>사용자가 글 내용을 입력하지 않고, 버튼을 클릭하면 버튼이 비활성화(disabled)되도록 한다</li>
+    <li>사용할 속성 메소드 : val /클래스 조작: addClass / 내용추가 : append</li>
+  </ul>
+
+  <input type="button" value="활성화 버튼">
+  <input type="button" value="비활성화 버튼" disabled>
+
+<div class="wrap">
+  <header>
+    <input type="button" class="btn" id="close">
+    <input type="button" class="btn" id="minbtn">
+    <input type="button" class="btn" id="maxbtn">
+    <img src="./talk.jpg" alt="프로필사진">
+    <span>집에 가고 싶땨ㅏㅏ</span>
+  </header>
+<!-- 대화상자 박스  : 상대방과 내가 작성한 글이 출력되는 화면-->
+  <section class="chatbox">
+    <!-- 상대가 쓴 것 -->
+    <div class="bubble1">자니?</div>
+    <!-- 내가 쓴 것 -->
+    <div class="bubble2">누구</div>
+  </section>
+<!-- 대화입력 상자 : 사용자가 글을 입력하는 부분 -->
+  <footer class="txt_box">
+    <textarea placeholder="대화내용을 입력하세요" name="" id="" cols="30" rows="" autofocus></textarea>
+    <input type="button" value="전송" id="send">
+  </footer>
+</div>
+</body>
+</html>

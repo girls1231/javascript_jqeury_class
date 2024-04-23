@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <!-- 제이쿼리 연결 -->
+<!-- 1. 제이쿼리 직접 연결하기 -->
+<script src="./script/jquery-3.7.1.min.js"></script> <!--최적화 버전 min  -->
+<!-- 2. JQUERY.COM에서 CND방식으로 연결 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+
+    const b = $('#btn');
+
+    b.click(function(){
+      $('#up').slideToggle();
+    });
+
+
+//팝업광고는  body에 쓰지 않고, 변수에 담아둔다
+    let modal = `
+    <div class="back" id="popup">
+      <div class="popup" >
+        <img src="./images/popup.jpg" alt="">
+        <p><input type="button" id="btn2" value="닫기"></p>
+      </div>
+    </div>`;
+
+//body태그의 맨 아래에 modal 변수 값을 출력한다.
+  $('body').append(modal); //변수 modal를 body에 넣어라
+  $('#btn2').click(function(){$('.back').fadeOut();}); //함수를 시행해라
+
+  });
+  </script>
+  <style>
+    .back{position: absolute; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);}
+    .popup{position: fixed; top: 30%; left :45%}
+    .popup{text-align: center;background-color: white; padding: 0; margin: 0;}
+    .popup >p>input{border: none; background-color: white; cursor: pointer; font-size: 20px;}
+    
+  </style>
+</head>
+<body>
+  <h2></h2>
+  <p id="up">
+    <img src="./images/main01_01.jpg" alt="">
+  </p>
+  <p><input type="button" value="닫기" id="btn"></p>
+<img src="./images/main01_02.jpg" alt="">
+
+
+
+</body>
+</html>
